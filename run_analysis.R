@@ -1,5 +1,7 @@
 # running analysis on wearable computer data
 
+library(dplyr)
+
 # set working directory
 setwd("~/Desktop/getting_and_cleaning_data/")
 curr <- getwd()
@@ -98,4 +100,10 @@ full_data <- rbind(test_data, train_data)
 # item:3 Uses descriptive activity names to name the activities in the data set 
 clean_full_data <- replaceActivityLabels(full_data)
 
-print(head(clean_full_data, 2))
+#print(head(clean_full_data, 2))
+#print(summary(clean_full_data))
+
+simplified_data <- group_by(clean_full_data, subject)
+
+print(head(simplified_data, 2))
+print(summary(simplified_data))
