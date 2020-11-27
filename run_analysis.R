@@ -100,10 +100,11 @@ full_data <- rbind(test_data, train_data)
 # item:3 Uses descriptive activity names to name the activities in the data set 
 clean_full_data <- replaceActivityLabels(full_data)
 
-#print(head(clean_full_data, 2))
-#print(summary(clean_full_data))
+print(head(clean_full_data, 10))
 
-simplified_data <- group_by(clean_full_data, subject)
+# item:5 creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+simplified_data <- clean_full_data %>% group_by(subject, activity) %>% summarise_all(mean)
 
-print(head(simplified_data, 2))
-print(summary(simplified_data))
+print(head(simplified_data, 10))
+
+write.csv(simplified_data,"tidy_data.csv")
