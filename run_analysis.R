@@ -107,4 +107,4 @@ simplified_data <- clean_full_data %>% group_by(subject, activity) %>% summarise
 
 print(head(simplified_data, 10))
 
-write.csv(simplified_data,"tidy_data.csv")
+write.table(simplified_data,"tidy_data.txt", row.name=FALSE)
