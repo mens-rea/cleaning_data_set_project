@@ -6,6 +6,7 @@ curr <- getwd()
 print(curr)
 
 # get specific values from the given features on all axis
+# item:3 getting only mean and standard deviation for each measurement
 getDataFeatures <- function(list) {
   features <- data.frame()
   for (i in 1:length(list)){
@@ -38,7 +39,25 @@ getDataFeatures <- function(list) {
     v17 <- asVector[270]
     v18 <- asVector[271]
     
-    newRow <- data.frame(v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,v13,v14,v15,v16,v17,v18)
+    # item:4 Appropriately labels the data set with descriptive variable names
+    newRow <- data.frame(tbody_acceleration_mean_x=v1,
+                         tbody_acceleration_mean_y=v2,
+                         tbody_acceleration_mean_z=v3,
+                         tbody_acceleration_sd_x=v4,
+                         tbody_acceleration_sd_y=v5,
+                         tbody_acceleration_sd_z=v6,
+                         tbody_gyro_mean_x=v7,
+                         tbody_gyro_mean_y=v8,
+                         tbody_gyro_mean_z=v9,
+                         tbody_gyro_sd_x=v10,
+                         tbody_gyro_sd_y=v11,
+                         tbody_gyro_sd_z=v12,
+                         fbody_acceleration_mean_x=v13,
+                         fbody_acceleration_mean_y=v14,
+                         fbody_acceleration_mean_z=v15,
+                         fbody_acceleration_sd_x=v16,
+                         fbody_acceleration_sd_y=v17,
+                         fbody_acceleration_sd_z=v18)
     features <- rbind(features, newRow)
   }
   return(features)
@@ -73,10 +92,10 @@ testFeatures <- getDataFeatures(xtest)
 test_data <- data.frame(subject=test_subject, activity=ytest)
 test_data <- cbind(test_data, testFeatures)
 
-# merge test and train data
+# item:1 merge test and train data
 full_data <- rbind(test_data, train_data)
 
-# replace activity description
+# item:3 Uses descriptive activity names to name the activities in the data set 
 clean_full_data <- replaceActivityLabels(full_data)
 
 print(head(clean_full_data, 2))
